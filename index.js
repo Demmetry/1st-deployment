@@ -5,10 +5,15 @@ const mongoose=require('mongoose')
 require('dotenv').config();
 const userRoute=require("./router/users")
 const postRoutes = require('./router/posts');
-
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }));
-
+   const cors = require('cors');
+   
+   app.use(express.json())
+   app.use(express.urlencoded({ extended: true }));
+   
+app.use(cors({
+  origin: 'http://localhost:3000', // allow frontend dev server
+  credentials: true                // if you use cookies or auth
+}));
 app.use(userRoute)
 app.use(postRoutes);
 
