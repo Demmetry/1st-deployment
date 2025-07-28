@@ -12,11 +12,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use(userRoute)
 app.use(postRoutes);
 
+mongoose.connect(process.env.MONGO_URI)
+.then(() => console.log("Connected to MongoDB Atlas"))
+.catch((err) => console.error("MongoDB connection error:", err));
 
-app.listen(port,()=>{
-    console.log("listening to 3000")
-    mongoose.connect(process.env.MONGO_URI)
-    .then(() => console.log("Connected to MongoDB Atlas"))
-    .catch((err) => console.error("MongoDB connection error:", err));
+// app.listen(port,()=>{
+//     console.log("listening to 3000")
 
-})
+// })
+
+module.exports=app;
